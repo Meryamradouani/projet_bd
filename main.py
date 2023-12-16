@@ -9,6 +9,7 @@ from coaches import app as coaches_app
 from charts import app as charts_app
 from insert_session import app as insert_session_app
 from insert_weekly_session import app as insert_weekly_session_app
+
 st.set_page_config(
     page_title="Pondering",
 )
@@ -61,6 +62,8 @@ multi_app.add_app("Entraineurs", coaches_app)
 multi_app.add_app("Graphiques", charts_app)
 multi_app.add_app("Insertion Séance", insert_session_app)
 multi_app.add_app("Insertion Séance Hebdomadaire", insert_weekly_session_app)
+
+# ...
 
 # Exécutez l'application
 multi_app.run()
