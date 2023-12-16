@@ -2,7 +2,6 @@
 
 import streamlit as st
 import requests
-import json
 
 def fetch_data(table_name):
     url = f'https://apex.oracle.com/pls/apex/mery/{table_name}/'
@@ -15,11 +14,26 @@ def fetch_data(table_name):
         response.raise_for_status()  # Lève une exception pour les codes d'erreur HTTP
         data = response.json()
 
-        st.write(f"Réponse JSON de la table {table_name} :")
-        st.json(data)
-
         if response.status_code == 200:
+            # Affichage des données sous forme de tableau
+            if data['items']:
+                st.markdown("### Voici toutes les séances :") 
+                table_data = []
+
+                # Ajouter les en-têtes du tableau
+                table_data.append(['Nom', 'Type', 'Niveau'])
+
+                # Ajouter les données de chaque séance à la liste
+                for item in data['items']:
+                    table_data.append([item.get('nom'), item.get('type'), item.get('niveau')])
+
+                # Afficher le tableau dans Streamlit
+                st.table(table_data)
+            else:
+                st.info(f"Aucune donnée disponible dans la table {table_name}.")
+
             st.success(f'Données de la table {table_name} récupérées avec succès.')
+
         else:
             st.warning(f'La requête a réussi, mais le statut était {response.status_code}.')
 
