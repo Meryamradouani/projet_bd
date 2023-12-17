@@ -1,5 +1,4 @@
 # insert_session.py
-
 import streamlit as st
 import requests
 
@@ -24,20 +23,56 @@ def insert_session(session_data):
         st.error(f'Erreur lors de la requête HTTP : {e}')
 
 def app():
-    st.title("Créer une nouvelle séance")
+    st.title("Insertion de Nouvelle Séance")
 
-    # Widgets pour saisir les données de la nouvelle séance
-    nom = st.text_input("Nom de la séance")
-    type_seance = st.text_input("Type de séance")
-    niveau = st.number_input("Niveau de la séance", min_value=1, max_value=10)
-    
+    # Ajout du style pour le formulaire
+    st.markdown(
+        """
+        <style>
+            body {
+                background-color: #f5f5f5;
+                font-family: 'Arial', sans-serif;
+            }
+            .stTextInput, .stNumberInput {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .stButton {
+                width: 100%;
+                padding: 10px;
+                background-color: #4caf50;
+                color: black;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .stButton:hover {
+                background-color: #45a049;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    session_id = st.text_input("ID de la séance", key="session_id")
+    session_name = st.text_input("Nom de la séance", key="session_name")
+    session_type = st.text_input("Type de la séance", key="session_type")
+    session_level = st.number_input("Niveau de la séance (entre 1 et 4)", min_value=1, max_value=4, step=1, key="session_level")
+
     if st.button("Créer Séance"):
-        new_session_data = {
-            "nom": nom,
-            "type": type_seance,
-            "niveau": niveau
-        }
-
-        insert_session(new_session_data)
-
-# Ajoutez d'autres fonctionnalités spécifiques à la page d'insertion de séance si nécessaire
+        if not all([session_id, session_name, session_type]):
+            st.error("Veuillez remplir tous les champs.")
+        elif not (1 <= session_level <= 4):
+            st.error("Le niveau doit être un entier entre 1 et 4.")
+        else:
+            new_session_data = {
+                "IdS": session_id,
+                "Nom": session_name,
+                "Type": session_type,
+                "Niveau": session_level
+            }
+            insert_session(new_session_data)
