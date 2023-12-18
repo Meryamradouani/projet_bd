@@ -1,70 +1,67 @@
 # home.py
-from PIL import Image
+
 import streamlit as st
+from streamlit_option_menu import option_menu
 
-def app():
-    # Style CSS pour la mise en forme
-    style = """
-    <style>
-        body {
-            background-color: #f2f2f2;  /* Couleur de fond */
-            font-family: 'Arial', sans-serif;  /* Police de caractères */
-        }
-        .container {
-            max-width: 800px;  /* Largeur maximale du contenu */
-            margin: auto;  /* Centrer le contenu */
-            padding: 20px;  /* Espace intérieur */
-            text-align: justify; /* Justification du texte */
-        }
-        img {
-            max-width: 100%;  /* Image responsive */
-            border-radius: 10px;  /* Coins arrondis pour l'image */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
-            margin-bottom: 20px;  /* Espace en bas de l'image */
-        }
-        h1 {
-            color: #333;  /* Couleur du titre */
-        }
-        h2 {
-            color: #333;  /* Couleur du sous-titre */
-        }
-        p {
-            line-height: 1.5;  /* Hauteur de ligne agréable */
-            color: #555;  /* Couleur du texte principal */
-        }
-    </style>
-    """
+from acceuil import app as acceuil_app
+from sessions import app as sessions_app
+from coaches import app as coaches_app
+from charts import app as charts_app
+from inserer_seance import inserer_seance_app as inserer_seance_app  # Mettez à jour l'import
+from insert_weekly_session import app as insert_weekly_session_app
 
-    # Appliquer le style CSS
-    st.markdown(style, unsafe_allow_html=True)
+st.set_page_config(
+    page_title="Pondering",
+)
 
-    # Présentation du projet en Markdown
-    st.title("Bienvenue dans notre application de gestion d'entraînement")
+class MultiApp:
+    def __init__(self):
+        self.apps = []
 
-    st.markdown("""
-    Notre application a été créée pour simplifier la gestion des séances d'entraînement, des entraîneurs,
-    et bien plus encore.
-    """)
+    def add_app(self, title, func):
+        self.apps.append({
+            "title": title,
+            "function": func
+        })
 
-    # Charger l'image
-    image = Image.open('WhatsApp Image 2023-12-15 at 23.05.48_e393b86e.jpg')  # Remplacez par le chemin de votre image
+    def run(self):
+        with st.sidebar:
+            app = option_menu(
+                menu_title='GYM ',
+                options=['Home', 'Séances', 'Entraineurs', 'Graphiques', 'Insertion Séance', 'Insertion Séance Hebdomadaire'],
+                icons=['house-fill', 'person-circle', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
+                menu_icon='chat-text-fill',
+                default_index=1,
+                styles={
+                    "container": {"padding": "5!important", "background-color": 'black'},
+                    "icon": {"color": "white", "font-size": "23px"},
+                    "nav-link": {"color": "white", "font-size": "20px", "text-align": "left", "margin": "0px",
+                                 "--hover-color": "blue"},
+                    "nav-link-selected": {"background-color": "#02ab21"},
+                }
+            )
 
-    # Redimensionner l'image
-    new_size = (600, 400)  # Remplacez par la taille souhaitée (largeur, hauteur)
-    resized_image = image.resize(new_size)
+        if app == "Home":
+            acceuil_app()
+        elif app == "Séances":
+            sessions_app()
+        elif app == "Entraineurs":
+            coaches_app()
+        elif app == "Graphiques":
+            charts_app()
+        elif app == "Insertion Séance":
+            inserer_seance_app()  # Mettez à jour la fonction appelée
+        elif app == "Insertion Séance Hebdomadaire":
+            insert_weekly_session_app()
 
-    # Afficher l'image redimensionnée
-    st.image(resized_image, caption='Salle de sport', use_column_width=True)
-
-    st.header("Objectifs principaux du projet")
-    st.markdown("""
-    - Affichage et filtrage des séances disponibles.
-    - Recherche et affichage des informations sur les entraîneurs.
-    - Visualisation de graphiques sur les séances programmées.
-    - Insertion de nouvelles séances via un formulaire.
-    - Insertion de nouvelles séances hebdomadaires dans la table Horaire.
-    """)
+# Créez une instance de MultiApp et ajoutez vos pages
+multi_app = MultiApp()
+multi_app.add_app("Home", acceuil_app)
+multi_app.add_app("Séances", sessions_app)
+multi_app.add_app("Entraineurs", coaches_app)
+multi_app.add_app("Graphiques", charts_app)
+multi_app.add_app("Insertion Séance", inserer_seance_app)
+multi_app.add_app("Insertion Séance Hebdomadaire", insert_weekly_session_app)
 
 # Exécutez l'application
-if __name__ == "__main__":
-    app()
+multi_app.run()
