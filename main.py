@@ -7,7 +7,7 @@ from home import app as home_app
 from sessions import app as sessions_app
 from coaches import app as coaches_app
 from charts import app as charts_app
-from insert_session import app as insert_session_app
+from insert_session import app as insert_session_app 
 from insert_weekly_session import app as insert_weekly_session_app
 
 st.set_page_config(
@@ -50,7 +50,7 @@ class MultiApp:
         elif app == "Graphiques":
             charts_app()
         elif app == "Insertion Séance":
-            insert_session_app()
+            insert_session_app()  # Corrected function call
         elif app == "Insertion Séance Hebdomadaire":
             insert_weekly_session_app()
 

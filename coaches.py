@@ -1,5 +1,4 @@
 # coaches.py
-
 import streamlit as st
 import requests
 
@@ -21,11 +20,34 @@ def fetch_coaches():
                 table_data = []
 
                 # Ajouter les en-têtes du tableau
-                table_data.append(['Nom', 'Prénom', 'Date de Naissance', 'email', 'numero de telephone'])
+                table_data.append(['Nom', 'Prénom', 'Date de Naissance', 'Email', 'Numéro de téléphone'])
 
                 # Ajouter les données de chaque entraîneur à la liste
                 for item in data['items']:
                     table_data.append([item.get('nom'), item.get('prenom'), item.get('datenaissance'), item.get('email'), item.get('numerotelephone')])
+
+                # Ajout du style au tableau
+                st.markdown(
+                    """
+                    <style>
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 1em 0;
+                            font-size: 16px;
+                        }
+                        th, td {
+                            padding: 10px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                    """,
+                    unsafe_allow_html=True
+                )
 
                 # Afficher le tableau dans Streamlit
                 st.table(table_data)

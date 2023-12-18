@@ -1,5 +1,4 @@
 # sessions.py
-
 import streamlit as st
 import requests
 
@@ -26,6 +25,29 @@ def fetch_data(table_name):
                 # Ajouter les données de chaque séance à la liste
                 for item in data['items']:
                     table_data.append([item.get('nom'), item.get('type'), item.get('niveau')])
+
+                # Ajout du style au tableau
+                st.markdown(
+                    """
+                    <style>
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 1em 0;
+                            font-size: 16px;
+                        }
+                        th, td {
+                            padding: 10px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                    """,
+                    unsafe_allow_html=True
+                )
 
                 # Afficher le tableau dans Streamlit
                 st.table(table_data)
