@@ -64,6 +64,7 @@ def main():
     trainers = fetch_trainers()
     sessions = fetch_sessions()
 
+<<<<<<< HEAD
     # Configuration du style
     st.markdown(
         """
@@ -93,6 +94,12 @@ def main():
 # Titre stylisé
     st.markdown(
         "<h1 style='text-align: center; color: #ff69b4;'>Formulaire d'insertion de séance hebdomadaire</h1>",
+=======
+
+# Titre stylisé
+    st.markdown(
+        "<h1 style='text-align: center; '>Formulaire d'insertion de séance hebdomadaire</h1>",
+>>>>>>> a56eb95b8a339edb5eedde4c21a649ab1a591cfe
         unsafe_allow_html=True
     )
 
@@ -120,5 +127,6 @@ def main():
        
         insert_session_schedule(data)
 
-if __name__=="main":
+if __name__ == "__main__":
     main()
+

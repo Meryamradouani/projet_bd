@@ -2,7 +2,11 @@ import streamlit as st
 import requests
 
 def fetch_session_data():
+<<<<<<< HEAD
     url = 'https://apex.oracle.com/pls/apex/fatima_zahra/seance/?limit=10000'
+=======
+    url = 'https://apex.oracle.com/pls/apex/salma10/seance/?limit=10000'
+>>>>>>> a56eb95b8a339edb5eedde4c21a649ab1a591cfe
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
@@ -23,9 +27,15 @@ def filter_and_display_sessions(session_data):
         st.warning("Aucune donnée de séance disponible.")
         return
 
+<<<<<<< HEAD
     actual_type_column_name = 'TYPE'
     actual_level_column_name = 'NIVEAU'
     actual_name_column_name = 'NOM'
+=======
+    actual_type_column_name = 'type'
+    actual_level_column_name = 'niveau'
+    actual_name_column_name = 'nom'
+>>>>>>> a56eb95b8a339edb5eedde4c21a649ab1a591cfe
 
     # Filter by session type
     session_types = st.multiselect("Filtrer par type de séance", list(set(session[actual_type_column_name] for session in session_data)))
@@ -67,7 +77,7 @@ def show_selected_sessions_schedule(session_data):
             st.warning(f"Aucun horaire disponible pour la séance {session_id}.")
 
 def fetch_session_schedule(session_id):
-    url = f'https://apex.oracle.com/pls/apex/wksp_workspaceaya1/hhhoraire/?limit=10000&ssseance_id_s={session_id}'
+    url = f'https://apex.oracle.com/pls/apex/salma10/horaire/?limit=10000&ssseance_id_s={session_id}'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
     try:
@@ -80,10 +90,10 @@ def fetch_session_schedule(session_id):
         for session_schedule in schedule_data['items']:
             formatted_schedule.append({
                 "jour": session_schedule["jour"],
-                "heure_de_debut": session_schedule["heure_de_debut"],
+                "h_debut": session_schedule["h_debut"],
                 "duree": session_schedule["duree"],
                 "gymsalle": session_schedule["gymsalle"],
-                "numero de seance": session_schedule["ssseance_id_s"],  # Change to the desired column name
+                "numero de seance": session_schedule["seance_id_s"],  # Change to the desired column name
             })
         return formatted_schedule
 

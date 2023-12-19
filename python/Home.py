@@ -54,7 +54,11 @@ def home_page():
     """)
 
     # Charger l'image
+<<<<<<< HEAD
     image = Image.open('photo/WhatsApp Image 2023-12-15 at 23.05.48_e393b86e.jpg')  # Remplacez par le chemin de votre image
+=======
+    image = Image.open('photo/WhatsApp Image 2023-12-18 at 23.42.38_efc183b8.jpg')  # Remplacez par le chemin de votre image
+>>>>>>> a56eb95b8a339edb5eedde4c21a649ab1a591cfe
 
     # Redimensionner l'image
     new_size = (600, 400)  # Remplacez par la taille souhaitée (largeur, hauteur)
@@ -73,4 +77,8 @@ def home_page():
     """)
 
 # Exécutez l'application
+<<<<<<< HEAD
 home_page()
+=======
+home_page()
+>>>>>>> a56eb95b8a339edb5eedde4c21a649ab1a591cfe
