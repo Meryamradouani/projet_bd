@@ -45,21 +45,15 @@ def main():
         """
         <style>
         body {
-        
-            background-color: #fdf6fa; /* Couleur de fond douce */
-            font-family: 'Arial', sans-serif; /* Police élégante */
-            color: #a64ac9; /* Couleur principale */
+            font-family: 'Arial', sans-serif; /* Nouvelle police */
         }
         .stButton { /* Style du bouton */
-            border-radius: 20px;
-            background-color: #ffc0cb;
-            color: #a64ac9;
-            padding: 10px 20px;
+            border-radius: 5px;
+            padding: 8px 15px;
         }
         .stTextInput, .stNumberInput { /* Style des champs de saisie */
-            border-radius: 10px;
-            border-color: #a64ac9;
-            padding: 5px;
+            border-radius: 5px;
+            padding: 8px;
         }
         </style>
         """,
@@ -68,7 +62,7 @@ def main():
 
     # Titre stylisé
     st.markdown(
-        "<h1 style='text-align: center; color: #ff69b4;'>Formulaire d'Insertion de Séance</h1>",
+        "<h1 style='text-align: center;'>Formulaire d'Insertion de Séance</h1>",
         unsafe_allow_html=True
     )
 

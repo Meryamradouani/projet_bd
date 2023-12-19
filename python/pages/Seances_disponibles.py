@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 def fetch_session_data():
-    url = 'https://apex.oracle.com/pls/apex/wksp_workspaceaya1/ssseance/?limit=10000'
+    url = 'https://apex.oracle.com/pls/apex/salma10/seance/?limit=10000'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
@@ -23,7 +23,7 @@ def filter_and_display_sessions(session_data):
         st.warning("Aucune donnée de séance disponible.")
         return
 
-    actual_type_column_name = 'tyype'
+    actual_type_column_name = 'type'
     actual_level_column_name = 'niveau'
     actual_name_column_name = 'nom'
 
@@ -67,7 +67,7 @@ def show_selected_sessions_schedule(session_data):
             st.warning(f"Aucun horaire disponible pour la séance {session_id}.")
 
 def fetch_session_schedule(session_id):
-    url = f'https://apex.oracle.com/pls/apex/wksp_workspaceaya1/hhhoraire/?limit=10000&ssseance_id_s={session_id}'
+    url = f'https://apex.oracle.com/pls/apex/salma10/horaire/?limit=10000&ssseance_id_s={session_id}'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
     try:
@@ -80,10 +80,10 @@ def fetch_session_schedule(session_id):
         for session_schedule in schedule_data['items']:
             formatted_schedule.append({
                 "jour": session_schedule["jour"],
-                "heure_de_debut": session_schedule["heure_de_debut"],
+                "h_debut": session_schedule["h_debut"],
                 "duree": session_schedule["duree"],
                 "gymsalle": session_schedule["gymsalle"],
-                "numero de seance": session_schedule["ssseance_id_s"],  # Change to the desired column name
+                "numero de seance": session_schedule["seance_id_s"],  # Change to the desired column name
             })
         return formatted_schedule
 

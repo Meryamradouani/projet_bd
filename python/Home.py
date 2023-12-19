@@ -1,11 +1,76 @@
+# home.py
+from PIL import Image
 import streamlit as st
 
-# Fonction pour la page d'accueil
 def home_page():
-    st.title("Bienvenue à notre Gym! 🏋️‍♂️")
-    st.image("photo/WhatsApp Image 2023-12-17 at 11.23.29.jpeg", width=700)
-    st.write("Notre gymnase ne se contente pas d'être un simple lieu d'exercice ; c'est un sanctuaire dédié à la vitalité et à l'épanouissement ! 🏋️‍♂️ Enraciné au cœur de notre communauté, notre gymnase incarne la rencontre de personnes déterminées à embrasser une vie saine. Accompagnés par une équipe de coachs qualifiés et une palette de services, nous offrons bien plus que des séances d'entraînement. Nous formons une famille unie par un engagement envers la transformation physique et mentale ! 🌟 Dans cet espace, chaque goutte de sueur devient une victoire, chaque foulée vers la forme physique est une célébration. Rejoignez cette aventure où chaque battement de cœur vous rapproche de votre meilleure version, où la passion pour le bien-être devient une expérience commune. 💪 Embarquez pour une vie plus saine et plus épanouissante, où chaque instant compte dans votre propre épopée ! ")
-    
+    # Style CSS pour la mise en forme
+    style = """
+    <style>
+        body {
+            background-color: #f2f2f2;  /* Couleur de fond */
+            font-family: 'Arial', sans-serif;  /* Police de caractères */
+        }
+        .container {
+            max-width: 800px;  /* Largeur maximale du contenu */
+            margin: auto;  /* Centrer le contenu */
+            padding: 20px;  /* Espace intérieur */
+            text-align: justify; /* Justification du texte */
+        }
+        img {
+            max-width: 100%;  /* Image responsive */
+            border-radius: 10px;  /* Coins arrondis pour l'image */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+            margin-bottom: 20px;  /* Espace en bas de l'image */
+        }
+        h1 {
+            color: #333;  /* Couleur du titre */
+        }
+        h2 {
+            color: #333;  /* Couleur du sous-titre */
+        }
+        p {
+            line-height: 1.5;  /* Hauteur de ligne agréable */
+            color: #555;  /* Couleur du texte principal */
+        }
+        /* Add your custom styles here */
+        .sidebar .sidebar-content {
+            background-color: #f0f0f0; /* Set background color */
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        }
+        .sidebar .sidebar-content .block-container {
+            padding: 1rem; /* Add padding to menu items */
+        }
+    </style>
+    """
 
-# Appel de la fonction pour afficher la page d'accueil
+    st.markdown(style, unsafe_allow_html=True)
+
+    # Présentation du projet en Markdown
+    st.title("Bienvenue dans notre application de gestion d'entraînement")
+
+    st.markdown("""
+    Notre application a été créée pour simplifier la gestion des séances d'entraînement, des entraîneurs,
+    et bien plus encore.
+    """)
+
+    # Charger l'image
+    image = Image.open('photo/WhatsApp Image 2023-12-18 at 23.42.38_efc183b8.jpg')  # Remplacez par le chemin de votre image
+
+    # Redimensionner l'image
+    new_size = (600, 400)  # Remplacez par la taille souhaitée (largeur, hauteur)
+    resized_image = image.resize(new_size)
+
+    # Afficher l'image redimensionnée
+    st.image(resized_image, caption='Salle de sport', use_column_width=True)
+
+    st.header("Objectifs principaux du projet")
+    st.markdown("""
+    - Affichage et filtrage des séances disponibles.
+    - Recherche et affichage des informations sur les entraîneurs.
+    - Visualisation de graphiques sur les séances programmées.
+    - Insertion de nouvelles séances via un formulaire.
+    - Insertion de nouvelles séances hebdomadaires dans la table Horaire.
+    """)
+
+# Exécutez l'application
 home_page()
